@@ -6,14 +6,12 @@ Cypress.Commands.add('acessarHome', () => {
 })
 
 Cypress.Commands.add('preencherFormLogin', (email, password) => {
-
     cy.get('#email').type(email)
     cy.get('#password').type(password)
 
 })
 
 Cypress.Commands.add('submitBtn', (textoBtn) => {
-
     cy.contains('button[type=submit]', textoBtn).click();
 })
 
@@ -32,3 +30,29 @@ Cypress.Commands.add('verificarMsgAlert', (msgEsperada) => {
         .and('have.css', 'color', 'rgb(230, 57, 70)');
 
 })
+
+
+Cypress.Commands.add('verificarPage', (rota, tituloPage) => {
+    cy.url().should('include', `${rota}`)
+    cy.contains('h1', tituloPage)
+
+})
+
+Cypress.Commands.add('submitBtnBaixarApp', (textoBtn) => {
+    cy.contains('.appinfo_yellowButton__j7S5v', textoBtn).click();
+})
+
+Cypress.Commands.add('verificarUrl', (rota) => {
+    cy.url().should('include', `${rota}`)
+   
+
+})
+
+
+Cypress.Commands.add('verificaMsgBoasVindas', (name) => {
+    const nomeUsuario = name.split(" ")[0]
+    
+    cy.get('[data-testid="user-greeting"]')
+        .should('be.visible')
+        .and('have.text', `Olá, ${nomeUsuario}!`)
+ })

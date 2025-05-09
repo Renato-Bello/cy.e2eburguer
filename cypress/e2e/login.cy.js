@@ -1,3 +1,6 @@
+import loginData from "../fixtures/login.json"
+
+
 describe('login', () => {
   //hooks
   //before - executar 1 vez antes de todos os testes
@@ -10,36 +13,27 @@ describe('login', () => {
     cy.acessarHome()
 
   })
-  it('login realizado com sucesso', () => {
-    const usuario = {
-     email: 'renato.stabelino@e2etreinamentos.com.br',
-     password: 'Reh1@@81995'
-    }
+  it('login usuário Gestão realizado com sucesso', () => {
+    const usuario = loginData.perfilGestao
     //preencher o formulario
     cy.preencherFormLogin(usuario.email, usuario.password)
     //clicar no botao
     cy.submitBtn("Acessar")
     //verificar se o login foi relizado com sucesso
    cy.verificarMsgToast("Login realizado com sucesso!")
+   cy.verificaMsgBoasVindas(usuario.name)
   })
 
 
 
 
 
-
-
 it('login invalido, email em formato invalido', () => {
-  const usuario = {
-   email: 'renato.stabelino-e2etreinamentos.com.br',
-   password: 'Reh1@@81995'
-  }
+  const usuario = {...loginData.perfilGestao, email: "gestao-e2eburguer.com.br"}
     cy.preencherFormLogin(usuario.email, usuario.password)
     cy.submitBtn("Acessar")
     cy.verificarMsgAlert("Por favor, insira um e-mail válido.")
 })
-
-
 
 
 
@@ -60,8 +54,6 @@ it('login invalido, email em branco', () => {
 
 
 
-
-
 it('login invalido, senha em formato invalido', () => {
   const usuario = {
    email: 'renato.stabelino@e2etreinamentos.com.br',
@@ -72,8 +64,6 @@ it('login invalido, senha em formato invalido', () => {
     cy.verificarMsgToast("Credenciais inválidas. Verifique seu e-mail e senha.")
 
 })
-
-
 
 
 
@@ -92,10 +82,6 @@ it('login invalido, campo senha em branco', () => {
 
 
 
-
-
-
-
 it('login invalido, todos os campos em branco', () => {
   const usuario = {
    email: ' ',
@@ -107,5 +93,50 @@ it('login invalido, todos os campos em branco', () => {
     cy.verificarMsgAlert("O campo de e-mail é obrigatório.")
 
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+it('login usuário Salão realizado com sucesso', () => {
+  const usuario = loginData.perfilSalao
+   cy.preencherFormLogin(usuario.email, usuario.password)
+   cy.submitBtn("Acessar")
+   cy.verificarMsgToast("Acesse através do app.")
+})
+
+
+
+
+
+it('Usuário perfil salão deve acessar aplicação pelo app', () => {
+  const usuario = loginData.perfilSalao
+   cy.preencherFormLogin(usuario.email, usuario.password)
+   cy.submitBtn("Acessar")
+   cy.verificarMsgToast("Acesse através do app.")
+   cy.verificarPage("app-info", "Acesso pelo APP E2E Burguer")
+})
+
+
+
+
+it('Dentro do pergil salão verificar se o caminho para baixar app esta correto', () => {
+  const usuario = loginData.perfilSalao
+   cy.preencherFormLogin(usuario.email, usuario.password)
+   cy.submitBtn("Acessar")
+   cy.verificarMsgToast("Acesse através do app.")
+   cy.verificarPage("app-info", "Acesso pelo APP E2E Burguer")
+   cy.submitBtnBaixarApp("Baixar o App")
+   //cy.verificarUrl("games?device=windows")
+})
+
 
 })
