@@ -93,9 +93,7 @@ Certifique-se de ter instalado:
 			  
     
       ### Demonstração 
-    - [Testes de Login](https://github.com/user-attachments/assets/a3babf91-5576-410a-83aa-d5597924ff02)
-    - [Testes de ordenação](https://github.com/user-attachments/assets/bb0e9d11-d273-4083-bb51-d4c564f80680)
-    - [Testes de validação de itens no carrinho](https://github.com/user-attachments/assets/5e23fda2-f3df-4017-ab46-cf3ccb933f9a)
+    [Testes de Login](https://github.com/user-attachments/assets/f3604643-e0a4-435e-b9f2-18e359561da7)
 
 ## 📦 Dependências Principais
 
